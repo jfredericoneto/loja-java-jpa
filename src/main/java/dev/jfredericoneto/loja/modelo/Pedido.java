@@ -38,6 +38,7 @@ public class Pedido {
     public Pedido(Cliente cliente) {
         this.cliente = cliente;
         this.data = LocalDate.now();
+        this.valorTotal = BigDecimal.ZERO;
     }
 
     public Long getId() {
@@ -71,6 +72,7 @@ public class Pedido {
     public void adicionarItem(ItemPedido item) {
         item.setPedido(this);
         this.itens.add(item);
+        this.valorTotal = this.valorTotal.add(item.getValor());
     }
 
 }
