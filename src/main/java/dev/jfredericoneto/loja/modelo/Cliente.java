@@ -1,5 +1,6 @@
 package dev.jfredericoneto.loja.modelo;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,35 +14,30 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private String cpf;
+
+    @Embedded
+    private DadosPessoais dadosPessoais;
 
     public Cliente() {
     }
 
     public Cliente(String nome, String cpf) {
-        this.nome = nome;
-        this.cpf = cpf;
+        this.dadosPessoais = new DadosPessoais(nome, cpf);
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getNome() {
-        return nome;
+    public DadosPessoais getDadosPessoais() {
+        return dadosPessoais;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getNome() {
+        return this.dadosPessoais.getNome();
     }
 
     public String getCpf() {
-        return cpf;
+        return this.dadosPessoais.getCpf();
     }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
 }
